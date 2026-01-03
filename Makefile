@@ -1,8 +1,8 @@
 S_NAME = server
 C_NAME = client
 FLAGS = -Wall -Werror -Wextra
-S_FILES = server.c ft_putnbr_fd.c 
-C_FILES = client.c
+S_FILES = server.c
+C_FILES = client.c 
 
 
 .PHONY: clean fclean re
@@ -10,11 +10,10 @@ C_FILES = client.c
 all: $(S_NAME) $(C_NAME) 
 
 $(S_NAME) :$(S_FILES) 
-	cc -$(FLAGS) $(S_FILES) -o $(S_NAME)
+	cc $(FLAGS) $(S_FILES) ./libft/libft.a -o $(S_NAME)
 
 $(C_NAME) :$(C_FILES) 
-	cc -$(FLAGS) $(C_FILES) -o $(S_NAME)
-
+	cc $(FLAGS) $(C_FILES) ./libft/libft.a -o $(C_NAME)
 
 %.o : %.c 
 	cc $(FLAGS) -c $< -o $@

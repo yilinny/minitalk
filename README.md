@@ -1,22 +1,25 @@
-#RESOURCES 
-https://github.com/ablaamim/Minitalk
-
 #GENERAL APPROACH 
 Two programs are written:
-1. Server: a process which registers signal handlers for specific signals. The process enters a waiting phase using ?sleep
+1. Server: a process which registers signal handlers for specific signals. The process enters a waiting phase using pause
 2. Client: A process that knows the server PID and sends sequences of signal using kill (), encoding data one bit at a time 
 
-#KEY CONCEPTS
-- bit manipulation?
-- unix signals 
-	- SIGUSR 1 & 2 are reserved for user use and have no default meaning
-	- relevant functions:
-		- signal/sigaction  links signal recieved to the signal handler 
-		void (*signal(int signum, void (*handler)(int)))(int);
-		// singal (signal, funcion)
-		- sigaction is a more advanced version that provides greater control (check again to fully understand) ??blocks other signals when the handler runs. ?signal kills the ongoing processes. 
-		- however, it is harder to use it is both a struct and function. You first initialize the components within the struct then call the function to set it up. 
-		- kill: allows you to send a signal. kill (pid, signal)
+Bit manipulation is used to encode and decode the string in a quick manner. Bit manipulation functions used include: 
+- >> and << for bit shifting
+- & bitwise AND
+- | bitwise OR
+The bits are sent from most significant to least significant. 
 
-#UTILS 
-- ft_printf is used by ther server to print the characters 
+#INSTRUCTIONS 
+Compile LibFT first 
+- cd libft
+- make all 
+Then return to the original directory 
+- cd ..
+Run make all to make both server and client program
+- make all
+Execute server with ./server
+Send signals using ./client (pid) (message)
+
+#PREVIOUS FUNCTIONS USED
+- Used ft_putnbr to print pid
+- Used ft_atoi to convert pid (string) in client to int to send the right signal 

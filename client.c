@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/03 11:16:10 by yi-ltan           #+#    #+#             */
+/*   Updated: 2026/01/03 11:17:48 by yi-ltan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-int send_signal(int pid, char c)
+int	send_signal(int pid, char c)
 {
-	static int count;
-	int	bit;
+	static int	count;
+	int			bit;
 
 	write (1, &c, 1);
-	while(count < 8)
+	while (count < 8)
 	{
 		bit = (c >> (7 - count)) & 1;
 		if (bit == 1)
@@ -20,16 +32,15 @@ int send_signal(int pid, char c)
 	return (0);
 }
 
-
-int main (int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	int pid;
-	int i;
+	int	pid;
+	int	i;
 
 	if (ac != 3)
 	{
 		write(1, "2 parameters expected, PID and string\n", 38);
-		return(0);
+		return (0);
 	}
 	pid = ft_atoi(av[1]);
 	i = 0;
@@ -38,5 +49,5 @@ int main (int ac, char *av[])
 		send_signal(pid, av[2][i]);
 		i ++;
 	}
-	return(0);
+	return (0);
 }
