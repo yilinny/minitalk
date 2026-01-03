@@ -1,18 +1,23 @@
 S_NAME = server
 C_NAME = client
 FLAGS = -Wall -Werror -Wextra
-S_FILES = server.c 
+S_FILES = server.c ft_putnbr_fd.c 
 C_FILES = client.c
+
 
 .PHONY: clean fclean re
 
-all: $(S_NAME) $(C_NAME)
+all: $(S_NAME) $(C_NAME) 
 
-$(S_NAME) :$(S_FILES)
+$(S_NAME) :$(S_FILES) 
 	cc -$(FLAGS) $(S_FILES) -o $(S_NAME)
 
-$(C_NAME) :$(C_FILES)
+$(C_NAME) :$(C_FILES) 
 	cc -$(FLAGS) $(C_FILES) -o $(S_NAME)
+
+
+%.o : %.c 
+	cc $(FLAGS) -c $< -o $@
 
 fclean: clean 
 	rm -f $(S_NAME) $(C_NAME)
