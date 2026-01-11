@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:16:10 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 11:57:17 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2026/01/11 11:58:15 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static volatile sig_atomic_t	g_ack;
 
 void	ack_handler(int sig)
 {
 	(void)sig;
+	write (1, "Signal Recieved!\n", 17);
 	g_ack = 1;
 }
 

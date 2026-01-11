@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/11 11:52:32 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 11:55:34 by yi-ltan          ###   ########.fr       */
+/*   Created: 2026/01/03 11:18:11 by yi-ltan           #+#    #+#             */
+/*   Updated: 2026/01/11 11:52:17 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	handler(int sig, siginfo_t *info, void *context)
 {
