@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_old.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:16:10 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/03 11:54:28 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2026/01/11 14:29:54 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	send_signal(int pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		count ++;
-		usleep(50);
+		usleep(300);
 	}
 	count = 0;
 	return (0);
@@ -47,6 +47,7 @@ int	main(int ac, char *av[])
 	while (av[2][i])
 	{
 		send_signal(pid, av[2][i]);
+		send_signal(pid, 0);
 		i ++;
 	}
 	return (0);

@@ -6,8 +6,8 @@ C_NAME = client
 S_BONUS_NAME = server_bonus
 C_BONUS_NAME = client_bonus
 
-S_SRC = server.c
-C_SRC = client.c
+S_SRC = server_old.c
+C_SRC = client_old.c
 S_BONUS_SRC = server_bonus.c
 C_BONUS_SRC = client_bonus.c
 
