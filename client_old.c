@@ -6,54 +6,36 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:16:10 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 11:57:17 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2026/01/03 11:54:28 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static volatile sig_atomic_t	g_ack;
-
-void	ack_handler(int sig)
+int	send_signal(int pid, char c)
 {
-	(void)sig;
-	g_ack = 1;
-}
-
-void	send_bit(int pid, int bit)
-{
-	if (bit)
-		kill(pid, SIGUSR1);
-	else
-		kill(pid, SIGUSR2);
-	g_ack = 0;
-	while (!g_ack)
-		pause();
-}
-
-void	send_message(int pid, char *msg)
-{
-	int	bit;
 	int	count;
+	int	bit;
 
 	count = 0;
-	while (*msg)
+	while (count < 8)
 	{
-		while (count < 8)
-		{
-			bit = (*msg >> (7 - count)) & 1;
-			send_bit(pid, bit);
-			count ++;
-		}
-		msg ++;
-		count = 0;
+		bit = (c >> (7 - count)) & 1;
+		if (bit == 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		count ++;
+		usleep(50);
 	}
+	count = 0;
+	return (0);
 }
 
 int	main(int ac, char *av[])
 {
-	int					pid;
-	struct sigaction	sa;
+	int	pid;
+	int	i;
 
 	if (ac != 3)
 	{
@@ -61,12 +43,11 @@ int	main(int ac, char *av[])
 		return (0);
 	}
 	pid = ft_atoi(av[1]);
-	sa.sa_handler = ack_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
-	send_message(pid, av[2]);
-	while (1)
-		pause();
+	i = 0;
+	while (av[2][i])
+	{
+		send_signal(pid, av[2][i]);
+		i ++;
+	}
 	return (0);
 }

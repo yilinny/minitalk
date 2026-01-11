@@ -5,22 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/11 11:52:32 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 11:55:34 by yi-ltan          ###   ########.fr       */
+/*   Created: 2026/01/03 11:18:11 by yi-ltan           #+#    #+#             */
+/*   Updated: 2026/01/03 11:20:21 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handler(int sig, siginfo_t *info, void *context)
+void	handler(int sig)
 {
 	static char	c;
 	static int	count;
 	int			bit;
-	pid_t		sender_pid;
 
-	(void)context;
-	sender_pid = info->si_pid;
 	if (count < 8)
 	{
 		if (sig == SIGUSR1)
@@ -36,7 +33,6 @@ void	handler(int sig, siginfo_t *info, void *context)
 		c = 0;
 		count = 0;
 	}
-	kill(sender_pid, SIGUSR1);
 }
 
 int	main(int ac, char *av[])
@@ -45,9 +41,9 @@ int	main(int ac, char *av[])
 
 	if (!ac || !av)
 		return (0);
-	sa.sa_sigaction = handler;
+	sa.sa_handler = handler;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_putnbr_fd(getpid(), 1);
