@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:16:10 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 13:39:31 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2026/01/11 11:57:17 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ void	send_bit(int pid, int bit)
 		pause();
 }
 
-void reset_char (int pid)
-{
-	int count;
-	count = 0;
-
-	while (count < 8)
-	{
-		send_bit(pid, 0);
-		count ++;
-	}
-}
-
 void	send_message(int pid, char *msg)
 {
 	int	bit;
@@ -57,7 +45,6 @@ void	send_message(int pid, char *msg)
 			send_bit(pid, bit);
 			count ++;
 		}
-		//reset_char(pid);
 		msg ++;
 		count = 0;
 	}
@@ -79,5 +66,7 @@ int	main(int ac, char *av[])
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
 	send_message(pid, av[2]);
+	while (1)
+		pause();
 	return (0);
 }

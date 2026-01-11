@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:52:32 by yi-ltan           #+#    #+#             */
-/*   Updated: 2026/01/11 13:37:44 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2026/01/11 11:55:34 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int ac, char *av[])
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_putnbr_fd(getpid(), 1);
 	write (1, "\n", 1);
-	fflush(stdout);
 	while (1)
 		pause();
 	return (0);
